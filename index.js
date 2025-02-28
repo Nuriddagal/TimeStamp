@@ -49,6 +49,10 @@ app.get(dateReg, function (req, res){
 app.get("/api", function(req, res){
   res.json({unix: Date.parse(new Date()), utc: new Date.toUTCString()})
 })
+app.get("/api/whoami", function(req, res){
+  console.log(req)
+  res.json({ipaddress: req.rawHeaders[req.rawHeaders.length-7], language: req.rawHeaders[9], software: req.rawHeaders[3]})
+})
 // Listen on port set in environment variable or default to 3000
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
